@@ -1,12 +1,7 @@
 import requests
-import re
-import sys
-import io
-from retrying import retry
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 
 head_bark = 'https://api.day.app/HCpomwdmsT2cNj7zkGmTvn'
@@ -18,23 +13,15 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-#driver.implicitly_wait(5) #隐式等待
-#print(driver.page_source) #打印页面
-#ActionChains(driver).move_by_offset(10, 10).click().perform() #鼠标左键点击，200为x坐标，100为y坐标
-#flow = driver.find_element(By.CLASS_NAME,'font-w700').text #通过class查询
-
 #点击
-#@retry(wait_fixed=10, stop_max_attempt_number=1)
 def click(path):
     driver.find_element(By.XPATH, path).click()
 
 #输入
-#@retry(wait_fixed=10, stop_max_attempt_number=1)
 def send(path,key):
     driver.find_element(By.XPATH, path).send_keys(key)
 
 #识别
-#@retry(wait_fixed=1, stop_max_attempt_number=2)
 def text(path):
     result = driver.find_element(By.XPATH, path).text
     return result
