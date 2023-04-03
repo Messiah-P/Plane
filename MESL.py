@@ -9,14 +9,40 @@ from time import sleep
 head_bark = 'https://api.day.app/HCpomwdmsT2cNj7zkGmTvn'
 logo_yy = 'https://lsky.pantheon.center/image/2023/04/02/642940f3a50c1.png'
 
-chrome_options = Options()
-chrome_options.page_load_strategy = 'eager'
-chrome_options.add_argument('--headless')
-chrome_options.add_argument('--no-sandbox')
-chrome_options.add_argument('--disable-dev-shm-usage')
+# 点击
+def click(driver, path):
+    element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, path)))
+    element.click()
 
+# 输入
+def send(driver, path, key):
+    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, path)))
+    element.send_keys(key)
+
+# 识别
+def text(driver, path):
+    element = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, path)))
+    result = element.text
+    return result
+
+# 登陆
+def login(driver):
+    driver.get('https://in.mesl.cloud/#/login')
+    send(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[2]/input', '1661862073@qq.com')
+    send(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[3]/input', '022760Mesl')
+    click(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[4]/button')
+    sleep(2)
+
+
+# 进入控制面板
+def goto_dashboard(driver):
+    driver.get('https://in.mesl.cloud/#/dashboard')
+    lasttime = text(driver, '//*[@id="main-container"]/div/div[2]/div/div/div[2]/div/div/div/div[1]/p/span')
+    flow = driver.find_element(By.CLASS_NAME, 'font-w700').text
+    return lasttime, flow
+
+# 数据提取
 def extract_data(lasttime, flow):
-    #数据提取
     time_left = str(lasttime).split(" ")[3] #距离到期时间
     time = str(lasttime).split(" ")[1] #提取时间
     time_reset = str(lasttime).split(" ")[5] #提取重置时间
@@ -51,39 +77,11 @@ def extract_data(lasttime, flow):
     deadline = "截止日期: " + time_y + "年" + time_m+ "月" + time_d + "日"
     ret = requests.get(f'{head_bark}/Mesl/{flow_daily}\n{flow_left}\n{s_jd}\n{time_left}\n{deadline}?icon={logo_yy}&group=Mesl')
 
-# 点击
-def click(driver, path):
-    element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, path)))
-    element.click()
-
-# 输入
-def send(driver, path, key):
-    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, path)))
-    element.send_keys(key)
-
-# 识别
-def text(driver, path):
-    element = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, path)))
-    result = element.text
-    return result
-
-
-#登陆
-# 登陆
-def login(driver):
-    driver.get('https://in.mesl.cloud/#/login')
-    send(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[2]/input', '1661862073@qq.com')
-    send(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[3]/input', '022760Mesl')
-    click(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[4]/button')
-    sleep(2)
-
-
-# 进入控制面板
-def goto_dashboard(driver):
-    driver.get('https://in.mesl.cloud/#/dashboard')
-    lasttime = text(driver, '//*[@id="main-container"]/div/div[2]/div/div/div[2]/div/div/div/div[1]/p/span')
-    flow = driver.find_element(By.CLASS_NAME, 'font-w700').text
-    return lasttime, flow
+chrome_options = Options()
+chrome_options.page_load_strategy = 'eager'
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
 
 driver = webdriver.Chrome(options=chrome_options)
 login(driver)
