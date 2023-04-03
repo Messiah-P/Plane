@@ -95,9 +95,8 @@ for number in range(1, flow_per):
 for number in range(1, 20 - flow_per):
     s_jd = s_jd + "-"
 s_jd = s_jd + "]" + "·" + flow_percent
-#s_jd = "[>>>>-----------------------]·10%·100 GB"
-#s5 = "已使用: " + flow_used + ' GB'
-#s6 = "总流量: " + flow_all + ' GB'
+
+
 deadline = "截止日期: " + time_y + "年" + time_m+ "月" + time_d + "日"
 ret = requests.get('%s/Mesl/%s\n%s\n%s\n%s\n%s?icon=%s&group=Mesl'% (head_bark,flow_daily,flow_left,s_jd,time_left,deadline,logo_yy))
 
