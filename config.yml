@@ -1,0 +1,17 @@
+
+# 路径配置
+paths:
+  #日志地址
+  log_path : ###
+
+# 链接配置
+links:
+  # 没有自己logo的图床链接的话就先用默认的
+  logo_mesl : https://lsky.pantheon.center/image/2023/04/02/642940f3a50c1.png
+  # 要爬取的机场链接地址
+  head_bark : ###
+
+#账号密码
+account:
+  email: ###
+  password: ###
