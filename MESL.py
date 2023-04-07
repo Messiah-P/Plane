@@ -6,7 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 
-from config import HEAD_BARK, LOGO_MESL
+from config import HEAD_BARK, LOGO_MESL, ACCOUNT, PASSWORD
+
 
 # 点击
 def click(driver, path):
@@ -27,8 +28,8 @@ def text(driver, path):
 # 登陆
 def login(driver):
     driver.get('https://in.mesl.cloud/#/login')
-    send(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[2]/input', '1661862073@qq.com')
-    send(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[3]/input', '022760Mesl')
+    send(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[2]/input', ACCOUNT)
+    send(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[3]/input', PASSWORD)
     click(driver, '//*[@id="main-container"]/div[2]/div/div/div/div[1]/div/div/div[4]/button')
     sleep(2)
 

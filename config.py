@@ -14,6 +14,11 @@ links = config["links"]
 LOGO_MESL = links["logo_mesl"]
 HEAD_BARK = links["head_bark"]
 
+# 账号配置
+links = config["account"]
+ACCOUNT = links["email"]
+PASSWORD = links["password"]
+
 #其他信息
 log_path = f"{LOG_PATH}/{datetime.datetime.now():%Y-%m-%d}.log"
 
