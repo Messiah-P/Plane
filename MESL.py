@@ -6,8 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 
-head_bark = 'https://api.day.app/HCpomwdmsT2cNj7zkGmTvn'
-logo_yy = 'https://lsky.pantheon.center/image/2023/04/02/642940f3a50c1.png'
+from config import HEAD_BARK, LOGO_MESL
 
 # 点击
 def click(driver, path):
@@ -75,7 +74,7 @@ def extract_data(lasttime, flow):
     s_jd = s_jd + "]" + "·" + flow_percent
 
     deadline = "截止日期: " + time_y + "年" + time_m+ "月" + time_d + "日"
-    ret = requests.get(f'{head_bark}/Mesl/{flow_daily}\n{flow_left}\n{s_jd}\n{time_left}\n{deadline}?icon={logo_yy}&group=Mesl')
+    ret = requests.get(f'{HEAD_BARK}/Mesl/{flow_daily}\n{flow_left}\n{s_jd}\n{time_left}\n{deadline}?icon={LOGO_MESL}&group=Mesl')
 
 chrome_options = Options()
 chrome_options.page_load_strategy = 'eager'

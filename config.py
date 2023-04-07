@@ -1,0 +1,20 @@
+import datetime
+import yaml
+
+# 读取YAML文件
+with open("/mnt/python/Plane/config.yml", "r") as f:
+    config = yaml.safe_load(f)
+
+# 获取Paths配置
+paths = config["paths"]
+LOG_PATH = paths["log_path"]
+
+# 链接配置
+links = config["links"]
+LOGO_MESL = links["logo_mesl"]
+HEAD_BARK = links["head_bark"]
+
+#其他信息
+log_path = f"{LOG_PATH}/{datetime.datetime.now():%Y-%m-%d}.log"
+
+
