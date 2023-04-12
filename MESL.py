@@ -39,3 +39,4 @@ if match:
     print("已用流量:" + str(used))
     print("总流量:" + str(total_gb))
     print("剩余时间:" + str(remaining_days))
+
